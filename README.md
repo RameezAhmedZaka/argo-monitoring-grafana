@@ -188,9 +188,3 @@ This setup is designed for:
 * Production-grade infrastructure with Terraform + Helm.
 
 ---
-
-If you want, I can also:
-✅ Add architecture diagram
-✅ Generate badges (GitHub Actions, Terraform, ArgoCD, etc.)
-✅ Add installation script
-✅ Add images/screenshots of dashboards
