@@ -65,6 +65,31 @@ It is built to provide full observability into Kubernetes workloads, especially 
   * Uses environment-specific workflows (dev/prod).
 
 ---
+### 6. ArgoCD Integration
+
+- Installed on the cluster.  
+- Configured dynamically using the `kubeconfig` retrieved at runtime from Parameter Store.  
+- Pulls manifiest code with the application image from GitHub **https://github.com/RameezAhmedZaka/argocd-dataapp.git** and deploys automatically.
+- The steps to download the argocd cli
+  ```
+  VERSION=v2.13.4
+  curl -sSL -o argocd https://github.com/argoproj/argo-cd/releases/download/$VERSION/argocd-linux-amd64
+  chmod +x argocd
+  sudo mv argocd /usr/local/bin/argocd
+  export PATH=$PATH:/usr/local/bin
+  ```
+- To access the cli use
+  ```
+  kubectl port-forward svc/argocd-server -n argocd 8080:443 > /var/log/argocd-portforward.log 2>&1 &
+  ```
+  ```
+  argocd login localhost:8080 --username admin --password fjfYsKrbJYtaTQtb --insecure
+  ```
+   
+-  Initial username = admin and to get the password
+  ```
+  kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d; echo)   
+  ```
 
 ## 📊 Monitoring Metrics Included
 
@@ -162,6 +187,10 @@ Then go inside the bashion and clone the code of `k8s-setup` and than than run:
 ```
 terraform init
 terraform apply -var-file=config/dev.tfvars
+```
+### Command to put the credentials on parameter store
+```
+aws ssm put-parameter   --name "/credentials/github"   --type "SecureString"   --value '{"username":"RameezAhmedZaka","token":"abc"}'
 ```
 ### **Prometheus Dashboards**
 Run this for accessing the prometheus dashboard.
