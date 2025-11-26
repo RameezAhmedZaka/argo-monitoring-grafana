@@ -49,10 +49,10 @@ It is built to provide full observability into Kubernetes workloads, especially 
 * Dashboards are generated via JSON in a dedicated directory:
 
 ```
-├── grafana-argocd-dashboard-scripts
-│   ├── argocd-dashboard-alternative-2.json
-│   ├── argocd-dashboard-alternative.json
-│   └── argocd-dashboard.json
+ grafana-argocd-dashboard-scripts
+   ├── argocd-dashboard-alternative-2.json
+   ├── argocd-dashboard-alternative.json
+   └── argocd-dashboard.json
 ```
 
 ### 🔹 **5. CI/CD via GitHub Actions**
